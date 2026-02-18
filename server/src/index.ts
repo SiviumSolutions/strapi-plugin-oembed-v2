@@ -14,12 +14,12 @@ const plugin = {
   bootstrap,
   destroy,
   config,
-  controllers,
-  routes,
-  services,
   contentTypes,
   policies,
   middlewares,
+  services,
+  controllers,
+  routes,
 };
 
 export default plugin;

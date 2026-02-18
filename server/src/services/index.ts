@@ -1,6 +1,8 @@
+import type { Core } from '@strapi/strapi';
+
 import oembed from './oembed';
 
-const services = {
+const services: Record<string, (context: { strapi: Core.Strapi }) => any> = {
   oembed,
 };
 

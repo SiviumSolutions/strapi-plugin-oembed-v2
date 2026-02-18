@@ -1,0 +1,566 @@
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __commonJS = (cb, mod) => function __require() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+
+// dist/_chunks/index-Bb4BpTHa.js
+var require_index_Bb4BpTHa = __commonJS({
+  "dist/_chunks/index-Bb4BpTHa.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, Symbol.toStringTag, { value: "Module" });
+    var jsxRuntime = require("react/jsx-runtime");
+    var designSystem = require("@strapi/design-system");
+    var styledComponents = require("styled-components");
+    var icons = require("@strapi/icons");
+    var reactIntl = require("react-intl");
+    var index = require_index_BBlML3q6();
+    var admin = require("@strapi/strapi/admin");
+    var react = require("react");
+    var getTranslation = (id) => `${index.pkgJson.strapi.name}.${id}`;
+    function ImportModal({ onImport, entry, children }) {
+      const [open, setOpen] = react.useState(false);
+      const [isLoading, setIsLoading] = react.useState(false);
+      const [inputError, setInputError] = react.useState("");
+      const [url, setUrl] = react.useState("");
+      const { get } = admin.useFetchClient();
+      const handleSubmit = react.useCallback(
+        (event) => {
+          event.preventDefault();
+          (async () => {
+            setIsLoading(true);
+            try {
+              setInputError("");
+              const { data } = await get(
+                `/${index.pkgJson.strapi.name}/fetch?url=${encodeURIComponent(url)}`
+              );
+              if (data.error) {
+                setInputError(data.error);
+              } else {
+                onImport(data);
+                setOpen(false);
+              }
+            } catch (error) {
+              const message = error instanceof Error ? error.message : "An error occurred";
+              setInputError(message);
+            } finally {
+              setIsLoading(false);
+            }
+          })();
+        },
+        [url, get, onImport]
+      );
+      react.useEffect(() => {
+        setUrl(entry?.url ?? "");
+      }, [entry?.url]);
+      return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Root, { open, onOpenChange: setOpen, children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Trigger, { children }),
+        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Content, { children: [
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Header, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Title, { children: /* @__PURE__ */ jsxRuntime.jsx(reactIntl.FormattedMessage, { id: getTranslation("modal.import.title") }) }) }),
+          /* @__PURE__ */ jsxRuntime.jsxs("form", { onSubmit: handleSubmit, children: [
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Body, { children: /* @__PURE__ */ jsxRuntime.jsxs(
+              designSystem.Field.Root,
+              {
+                name: "name",
+                error: inputError,
+                required: true,
+                hint: /* @__PURE__ */ jsxRuntime.jsx(reactIntl.FormattedMessage, { id: getTranslation("modal.import.input.description") }),
+                children: [
+                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: /* @__PURE__ */ jsxRuntime.jsx(reactIntl.FormattedMessage, { id: getTranslation("modal.import.input.label") }) }),
+                  /* @__PURE__ */ jsxRuntime.jsx(
+                    designSystem.Field.Input,
+                    {
+                      type: "text",
+                      value: url,
+                      onChange: ({ target: { value } }) => {
+                        setUrl(value);
+                      }
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Hint, {}),
+                  /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
+                ]
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Modal.Footer, { children: [
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Modal.Close, { children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { variant: "tertiary", children: /* @__PURE__ */ jsxRuntime.jsx(reactIntl.FormattedMessage, { id: "app.components.Button.cancel" }) }) }),
+              /* @__PURE__ */ jsxRuntime.jsx(designSystem.Button, { type: "submit", variant: "default", loading: isLoading, children: /* @__PURE__ */ jsxRuntime.jsx(reactIntl.FormattedMessage, { id: getTranslation("modal.import.button.import") }) })
+            ] })
+          ] })
+        ] })
+      ] });
+    }
+    function InputEmptyButton({ onImport }) {
+      return /* @__PURE__ */ jsxRuntime.jsx(designSystem.CarouselInput, { label: "", nextLabel: "", previousLabel: "", selectedSlide: 0, children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.CarouselSlide, { label: "", style: { cursor: "pointer" }, children: /* @__PURE__ */ jsxRuntime.jsx(ImportModal, { entry: null, onImport, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: "12px", alignItems: "center", children: [
+        /* @__PURE__ */ jsxRuntime.jsx(icons.PlusCircle, { "aria-hidden": true, width: "3.2em", height: "3.2em", fill: "primary600" }),
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Typography, { variant: "pi", fontWeight: "bold", textColor: "neutral600", children: /* @__PURE__ */ jsxRuntime.jsx(reactIntl.FormattedMessage, { id: getTranslation("form.button.import") }) })
+      ] }) }) }) });
+    }
+    function InputOembedCard({ entry, onImport }) {
+      const { formatMessage } = reactIntl.useIntl();
+      const { oembed, thumbnail, url } = entry;
+      const onOpen = () => {
+        window.open(url, "_blank", "noopener,noreferrer");
+      };
+      const onClear = () => onImport(null);
+      return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Card, { children: [
+        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.CardHeader, { children: [
+          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.CardAction, { position: "end", children: [
+            /* @__PURE__ */ jsxRuntime.jsx(
+              designSystem.IconButton,
+              {
+                label: formatMessage({ id: getTranslation("form.button.open") }),
+                onClick: onOpen,
+                withTooltip: false,
+                children: /* @__PURE__ */ jsxRuntime.jsx(icons.ExternalLink, {})
+              }
+            ),
+            /* @__PURE__ */ jsxRuntime.jsx(ImportModal, { entry, onImport, children: /* @__PURE__ */ jsxRuntime.jsx(
+              designSystem.IconButton,
+              {
+                withTooltip: false,
+                label: formatMessage({ id: getTranslation("form.button.edit") }),
+                children: /* @__PURE__ */ jsxRuntime.jsx(icons.Pencil, {})
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntime.jsx(
+              designSystem.IconButton,
+              {
+                label: formatMessage({ id: getTranslation("form.button.delete") }),
+                onClick: onClear,
+                variant: "danger",
+                withTooltip: false,
+                children: /* @__PURE__ */ jsxRuntime.jsx(icons.Trash, {})
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.CardAsset, { src: thumbnail ?? void 0 }),
+          oembed.author_name && /* @__PURE__ */ jsxRuntime.jsx(designSystem.CardTimer, { children: oembed.author_name })
+        ] }),
+        /* @__PURE__ */ jsxRuntime.jsxs(designSystem.CardBody, { children: [
+          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.CardContent, { children: [
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.CardTitle, { children: oembed.title ?? url }),
+            /* @__PURE__ */ jsxRuntime.jsx(designSystem.CardSubtitle, { children: oembed.provider_name })
+          ] }),
+          /* @__PURE__ */ jsxRuntime.jsx(designSystem.CardBadge, { children: oembed.type })
+        ] })
+      ] });
+    }
+    function Input({ error = void 0, name, label, onChange, value }) {
+      const hasValue = !!value?.url && !!value?.oembed;
+      const theme = styledComponents.useTheme();
+      const handleImport = (data) => {
+        onChange({
+          target: {
+            name,
+            value: data
+          }
+        });
+      };
+      return /* @__PURE__ */ jsxRuntime.jsx(designSystem.DesignSystemProvider, { theme, children: /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Field.Root, { name: "oembed", error, children: [
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Label, { children: label }),
+        !hasValue && /* @__PURE__ */ jsxRuntime.jsx(InputEmptyButton, { onImport: handleImport }),
+        hasValue && /* @__PURE__ */ jsxRuntime.jsx(InputOembedCard, { entry: value, onImport: handleImport }),
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Hint, {}),
+        /* @__PURE__ */ jsxRuntime.jsx(designSystem.Field.Error, {})
+      ] }) });
+    }
+    exports2.default = Input;
+  }
+});
+
+// dist/_chunks/en-BZjvNZGN.js
+var require_en_BZjvNZGN = __commonJS({
+  "dist/_chunks/en-BZjvNZGN.js"(exports2) {
+    "use strict";
+    Object.defineProperty(exports2, Symbol.toStringTag, { value: "Module" });
+    var en = {
+      "oembed.custom-field.label": "oEmbed",
+      "oembed.custom-field.description": "Embed content from external sources",
+      "oembed.form.button.import": "Click to import oEmbed content from a URL",
+      "oembed.form.button.open": "Open",
+      "oembed.form.button.edit": "Edit",
+      "oembed.form.button.delete": "Delete",
+      "oembed.modal.import.title": "Import oEmbed",
+      "oembed.modal.import.input.label": "URL",
+      "oembed.modal.import.input.description": "The URL you would like to retrieve metadata from",
+      "oembed.modal.import.button.import": "Import"
+    };
+    exports2.default = en;
+  }
+});
+
+// dist/_chunks/index-BBlML3q6.js
+var require_index_BBlML3q6 = __commonJS({
+  "dist/_chunks/index-BBlML3q6.js"(exports2) {
+    "use strict";
+    var react = require("react");
+    var __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
+      const v = glob[path];
+      if (v) {
+        return typeof v === "function" ? v() : Promise.resolve(v);
+      }
+      return new Promise((_, reject) => {
+        (typeof queueMicrotask === "function" ? queueMicrotask : setTimeout)(
+          reject.bind(
+            null,
+            new Error(
+              "Unknown variable dynamic import: " + path + (path.split("/").length !== segs ? ". Note that variables only represent file names one level deep." : "")
+            )
+          )
+        );
+      });
+    };
+    var name = "@sivium/strapi-plugin-oembed-v2";
+    var version = "2.0.5";
+    var description = "Fork of strapi-plugin-oembed-v2 with fixes for Strapi 5 style isolation and tooltip issues.";
+    var keywords = [
+      "strapi",
+      "plugin",
+      "oembed",
+      "embed",
+      "media",
+      "youtube",
+      "vimeo",
+      "tiktok",
+      "soundcloud",
+      "spotify",
+      "codepen",
+      "twitter"
+    ];
+    var homepage = "https://github.com/SiviumSolutions/strapi-plugin-oembed-v2";
+    var repository = {
+      type: "git",
+      url: "https://github.com/SiviumSolutions/strapi-plugin-oembed-v2"
+    };
+    var license = "MIT";
+    var type = "commonjs";
+    var exports$1 = {
+      "./package.json": "./package.json",
+      "./strapi-admin": {
+        source: "./admin/src/index.ts",
+        "import": "./dist/admin/index.mjs",
+        require: "./dist/admin/index.js",
+        "default": "./dist/admin/index.js"
+      },
+      "./strapi-server": {
+        source: "./server/src/index.ts",
+        "import": "./dist/server/index.mjs",
+        require: "./dist/server/index.js",
+        "default": "./dist/server/index.js"
+      }
+    };
+    var files = [
+      "dist"
+    ];
+    var scripts = {
+      build: "strapi-plugin build",
+      lint: "eslint .",
+      "lint:fix": "eslint . --fix",
+      format: 'prettier --write "**/*.{js,jsx,ts,tsx,json,md}"',
+      "format:check": 'prettier --check "**/*.{js,jsx,ts,tsx,json,md}"',
+      prepare: "husky",
+      "test:ts:back": "run -T tsc -p server/tsconfig.json",
+      "test:ts:front": "run -T tsc -p admin/tsconfig.json",
+      verify: "strapi-plugin verify",
+      watch: "strapi-plugin watch",
+      "watch:link": "strapi-plugin watch:link"
+    };
+    var dependencies = {
+      "@extractus/oembed-extractor": "^4.0.7",
+      "@strapi/design-system": "^2.0.0-rc.23",
+      "@strapi/icons": "^2.0.0-rc.23",
+      "react-intl": "^7.1.10"
+    };
+    var devDependencies = {
+      "@eslint/compat": "^1.2.8",
+      "@eslint/js": "^9.20.0",
+      "@strapi/sdk-plugin": "^5.3.2",
+      "@strapi/strapi": "^5.12.5",
+      "@strapi/typescript-utils": "^5.12.5",
+      "@types/react": "^19.1.2",
+      "@types/react-dom": "^19.1.2",
+      eslint: "^9.23.0",
+      "eslint-config-prettier": "^10.1.1",
+      "eslint-plugin-import": "^2.31.0",
+      "eslint-plugin-jest": "^28.11.0",
+      "eslint-plugin-prettier": "^5.2.6",
+      "eslint-plugin-promise": "^7.2.1",
+      "eslint-plugin-react": "7.37.4",
+      "eslint-plugin-react-hooks": "^5.2.0",
+      "eslint-plugin-simple-import-sort": "^12.1.1",
+      "eslint-plugin-sonarjs": "^3.0.2",
+      husky: "^9.1.7",
+      prettier: "3.5.3",
+      react: "^18.3.1",
+      "react-dom": "^18.3.1",
+      "react-router-dom": "^6.30.0",
+      "sort-package-json": "^3.0.0",
+      "styled-components": "^6.1.17",
+      typescript: "^5.8.3",
+      "typescript-eslint": "^8.29.0"
+    };
+    var peerDependencies = {
+      "@strapi/sdk-plugin": "^5.3.2",
+      "@strapi/strapi": "^5.12.5",
+      react: "^18.3.1",
+      "react-dom": "^18.3.1",
+      "react-router-dom": "^6.30.0",
+      "styled-components": "^6.1.17"
+    };
+    var strapi = {
+      kind: "plugin",
+      name: "oembed",
+      displayName: "oEmbed",
+      description: "Embed content from third-party sites in Strapi v5"
+    };
+    var pkgJson = {
+      name,
+      version,
+      description,
+      keywords,
+      homepage,
+      repository,
+      license,
+      type,
+      exports: exports$1,
+      files,
+      scripts,
+      dependencies,
+      devDependencies,
+      peerDependencies,
+      strapi
+    };
+    var Initializer = ({ setPlugin }) => {
+      const ref = react.useRef(setPlugin);
+      react.useEffect(() => {
+        ref.current(pkgJson.strapi.name);
+      }, []);
+      return null;
+    };
+    var index = {
+      register(app) {
+        app.registerPlugin({
+          id: pkgJson.strapi.name,
+          initializer: Initializer,
+          isReady: true,
+          name: pkgJson.strapi.name
+        });
+        app.customFields.register({
+          pluginId: pkgJson.strapi.name,
+          name: "oembed",
+          type: "json",
+          components: {
+            Input: async () => Promise.resolve().then(() => require_index_Bb4BpTHa())
+          },
+          intlLabel: {
+            id: "oembed.custom-field.label",
+            defaultMessage: "oEmbed"
+          },
+          intlDescription: {
+            id: "oembed.custom-field.description",
+            defaultMessage: "Embed content from external sources"
+          }
+        });
+      },
+      async registerTrads({ locales }) {
+        return Promise.all(
+          locales.map(async (locale) => {
+            try {
+              const { default: data } = await __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "./translations/en.json": () => Promise.resolve().then(() => require_en_BZjvNZGN()) }), `./translations/${locale}.json`, 3);
+              return { data, locale };
+            } catch {
+              return { data: {}, locale };
+            }
+          })
+        );
+      }
+    };
+    exports2.index = index;
+    exports2.pkgJson = pkgJson;
+  }
+});
+
+// dist/admin/index.js
+var require_admin = __commonJS({
+  "dist/admin/index.js"(exports2, module2) {
+    "use strict";
+    var index = require_index_BBlML3q6();
+    module2.exports = index.index;
+  }
+});
+
+// dist/server/index.js
+var require_server = __commonJS({
+  "dist/server/index.js"(exports2, module2) {
+    "use strict";
+    var bootstrap = () => {
+    };
+    var config = {
+      default: {
+        disableThumbnail: false
+      },
+      validator() {
+      }
+    };
+    var contentTypes = {};
+    var strapi = {
+      name: "oembed"
+    };
+    var pkgJson = {
+      strapi
+    };
+    var controller = ({ strapi: strapi2 }) => ({
+      async fetch(ctx) {
+        ctx.body = await strapi2.plugin(pkgJson.strapi.name).service("oembed").fetch(ctx.request.query.url);
+      }
+    });
+    var controllers = {
+      oembed: controller
+    };
+    var destroy = () => {
+    };
+    var middlewares = {};
+    var policies = {};
+    var register = ({ strapi: strapi2 }) => {
+      strapi2.customFields.register({
+        name: "oembed",
+        plugin: "oembed",
+        type: "json",
+        inputSize: {
+          default: 6,
+          isResizable: true
+        }
+      });
+    };
+    var adminRoutes = [
+      {
+        method: "GET",
+        path: "/fetch",
+        handler: "oembed.fetch",
+        config: {
+          policies: []
+        }
+      }
+    ];
+    var routes = {
+      admin: {
+        type: "admin",
+        routes: adminRoutes
+      }
+    };
+    var service = ({ strapi: strapi2 }) => ({
+      async fetch(url) {
+        const { extract } = await import("@extractus/oembed-extractor");
+        const disableThumbnail = strapi2.plugin("oembed").config("disableThumbnail");
+        try {
+          new URL(url);
+        } catch {
+          return {
+            error: "The URL is invalid."
+          };
+        }
+        try {
+          const rawOembed = await extract(url);
+          const oembed = await this.postprocess(rawOembed);
+          let thumbnail = null;
+          if (!disableThumbnail) {
+            thumbnail = await this.generateThumbnail(oembed);
+          }
+          return {
+            url,
+            oembed,
+            thumbnail
+          };
+        } catch (error) {
+          if (error.response?.status === 404) {
+            return {
+              error: "This URL can't be found"
+            };
+          } else if (error.response?.status === 401) {
+            return {
+              error: "Embedding has been disabled for this media"
+            };
+          } else {
+            throw new Error(error instanceof Error ? error.message : String(error));
+          }
+        }
+      },
+      postprocess(oembed) {
+        if (oembed.provider_name === "YouTube") {
+          return this.postprocessYouTube(oembed);
+        }
+        return oembed;
+      },
+      /**
+       * YouTube offers high resolution images
+       */
+      postprocessYouTube(oembed) {
+        const thumbnailUrl = oembed.thumbnail_url;
+        if (!thumbnailUrl) {
+          return null;
+        }
+        oembed.thumbnail_url = oembed.thumbnail_url.substring(0, thumbnailUrl.lastIndexOf("/") + 1) + "maxresdefault.jpg";
+        return oembed;
+      },
+      /**
+       * For cookie privacy, download the thumbnail and store as an inline image.
+       * This also gets around CSP issues.
+       */
+      async generateThumbnail(oembed) {
+        const thumbnailUrl = oembed.thumbnail_url;
+        if (!thumbnailUrl) {
+          return null;
+        }
+        return await this.generateBase64FromUrl(thumbnailUrl);
+      },
+      async generateBase64FromUrl(url) {
+        const response = await fetch(url);
+        const buffer = await response.arrayBuffer();
+        const string = Buffer.from(buffer).toString("base64");
+        const contentType = response.headers.get("content-type");
+        return `data:${contentType};base64,${string}`;
+      }
+    });
+    var services = {
+      oembed: service
+    };
+    var plugin = {
+      register,
+      bootstrap,
+      destroy,
+      config,
+      contentTypes,
+      policies,
+      middlewares,
+      services,
+      controllers,
+      routes
+    };
+    module2.exports = plugin;
+  }
+});
+
+// <stdin>
+require_admin();
+require_server();

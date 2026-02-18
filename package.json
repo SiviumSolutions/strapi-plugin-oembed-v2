@@ -1,6 +1,6 @@
 {
   "name": "@sivium/strapi-plugin-oembed-v2",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Fork of strapi-plugin-oembed-v2 with fixes for Strapi 5 style isolation and tooltip issues.",
   "keywords": [
     "strapi",
