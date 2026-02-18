@@ -1,5 +1,7 @@
 import oembed from './oembed';
 
-export default {
+const services = {
   oembed,
 };
+
+export default services;

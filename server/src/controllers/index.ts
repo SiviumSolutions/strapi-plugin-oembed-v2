@@ -1,5 +1,7 @@
 import oembed from './oembed';
 
-export default {
+const controllers = {
   oembed,
 };
+
+export default controllers;
