@@ -1,5 +1,4 @@
-import { DesignSystemProvider, Field } from '@strapi/design-system';
-import { useTheme } from 'styled-components';
+import { Field } from '@strapi/design-system';
 
 import { type Oembed } from '@/shared/types/oembed';
 
@@ -23,7 +22,6 @@ export type InputProps = {
 
 export default function Input({ error = undefined, name, label, onChange, value }: InputProps) {
   const hasValue = !!value?.url && !!value?.oembed;
-  const theme = useTheme();
 
   const handleImport: InputCallback = (data: Oembed | null) => {
     onChange({
@@ -35,16 +33,14 @@ export default function Input({ error = undefined, name, label, onChange, value 
   };
 
   return (
-    <DesignSystemProvider theme={theme}>
-      <Field.Root name="oembed" error={error}>
-        <Field.Label>{label}</Field.Label>
+    <Field.Root name="oembed" error={error}>
+      <Field.Label>{label}</Field.Label>
 
-        {!hasValue && <InputEmptyButton onImport={handleImport} />}
-        {hasValue && <InputOembedCard entry={value} onImport={handleImport} />}
+      {!hasValue && <InputEmptyButton onImport={handleImport} />}
+      {hasValue && <InputOembedCard entry={value} onImport={handleImport} />}
 
-        <Field.Hint />
-        <Field.Error />
-      </Field.Root>
-    </DesignSystemProvider>
+      <Field.Hint />
+      <Field.Error />
+    </Field.Root>
   );
 }
